@@ -1,5 +1,7 @@
-package hello
+package com.ildar.outguess.backend
 
+import com.ildar.outguess.backend.model.User
+import com.ildar.outguess.backend.repositories.UsersRepository
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -12,13 +14,13 @@ class Application {
 	private val log = LoggerFactory.getLogger(Application::class.java)
 
 	@Bean
-	fun init(repository: CustomerRepository) = CommandLineRunner {
+	fun init(repository: UsersRepository) = CommandLineRunner {
 			// save a couple of customers
-			repository.save(Customer("Jack", "Bauer"))
-			repository.save(Customer("Chloe", "O'Brian"))
-			repository.save(Customer("Kim", "Bauer"))
-			repository.save(Customer("David", "Palmer"))
-			repository.save(Customer("Michelle", "Dessler"))
+			repository.save(User("Jack", "Bauer"))
+			repository.save(User("Chloe", "O'Brian"))
+			repository.save(User("Kim", "Bauer"))
+			repository.save(User("David", "Palmer"))
+			repository.save(User("Michelle", "Dessler"))
 
 			// fetch all customers
 			log.info("Customers found with findAll():")
@@ -38,7 +40,7 @@ class Application {
 			// fetch customers by last name
 			log.info("Customer found with findByLastName('Bauer'):")
 			log.info("--------------------------------------------")
-			repository.findByLastName("Bauer").forEach { log.info(it.toString()) }
+			repository.findByEmail("Bauer").forEach { log.info(it.toString()) }
 			log.info("")
 	}
 
