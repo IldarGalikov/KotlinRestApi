@@ -1,14 +1,18 @@
 package com.ildar.outguess.backend.model
 
-class Game(val users: List<User>) {
+import javax.persistence.*
 
-    var round: Int = 1
-    val players: List<Player> = users.map {u -> Player(u,this) }
-    val fieldSize: Int = 2
 
-    init{
-        players.forEach{
-            p -> p.generateMap()
-        }
-    }
-}
+@Entity
+data class Game(
+        @OneToMany(fetch = FetchType.EAGER)
+        var players: List<Player> = emptyList(),
+        val fieldSize: Int = 2,
+        var currentTurn: Int = 1,
+        var rollX: Int = -1,
+        var rollY: Int = -1,
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        var id: Long = 0
+)
+

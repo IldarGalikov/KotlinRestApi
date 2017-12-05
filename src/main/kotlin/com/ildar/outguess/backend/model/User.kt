@@ -8,6 +8,6 @@ import javax.persistence.Id
 @Entity
 data class User(
         val username: String = "",
-        val email: String= "",
+        val email: String = "",
         @Id @GeneratedValue
         val id: Long = -1)

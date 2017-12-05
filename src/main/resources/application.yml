@@ -16,7 +16,7 @@ spring:
       path: /h2
 
 spring.jpa:
-    hibernate.ddl-auto: create-drop
+    hibernate.ddl-auto: update
 
 logging:
   org.hibernate: INFO
