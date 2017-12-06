@@ -1,11 +1,11 @@
-package com.ildar.outguess.backend
+package com.b45.outguess.backend
 
-import com.ildar.outguess.backend.model.Game
-import com.ildar.outguess.backend.model.Player
-import com.ildar.outguess.backend.model.User
-import com.ildar.outguess.backend.repositories.GamesRepository
-import com.ildar.outguess.backend.repositories.PlayersRepository
-import com.ildar.outguess.backend.repositories.UsersRepository
+import com.b45.outguess.backend.model.Game
+import com.b45.outguess.backend.model.Player
+import com.b45.outguess.backend.model.User
+import com.b45.outguess.backend.repositories.GamesRepository
+import com.b45.outguess.backend.repositories.PlayersRepository
+import com.b45.outguess.backend.repositories.UsersRepository
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -22,25 +22,28 @@ class Application {
              gamesRepository: GamesRepository,
              playersRepository: PlayersRepository) = CommandLineRunner {
 
-
         usersRepository.save(User("Jack", "Bauer"))
         usersRepository.save(User("Chloe", "O'Brian"))
         usersRepository.save(User("Kim", "Bauer"))
         usersRepository.save(User("David", "Palmer"))
         usersRepository.save(User("Michelle", "Dessler"))
-
+        usersRepository.flush()
         log.info("users found with findAll():")
         log.info("-------------------------------")
         usersRepository.findAll().forEach { log.info(it.toString()) }
         log.info("\n\n")
 
-        val players = usersRepository.findAll().map { u -> Player(user = u) }
-        playersRepository.saveAll(players)
 
+        playersRepository.saveAll(usersRepository.findAll().map { Player(it) }.toList())
+
+        playersRepository.flush()
         log.info("players found with findAll():")
         log.info("-------------------------------")
         playersRepository.findAll().forEach { log.info(it.toString()) }
         log.info("\n\n")
+
+
+
 
         gamesRepository.save(Game(playersRepository.findAll().toList()))
 
@@ -48,7 +51,6 @@ class Application {
         log.info("-------------------------------")
         gamesRepository.findAll().forEach { log.info(it.toString()) }
         log.info("\n\n")
-
 
     }
 

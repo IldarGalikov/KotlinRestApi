@@ -1,4 +1,4 @@
-package com.ildar.outguess.backend.model
+package com.b45.outguess.backend.model
 
 interface FieldEffect {
     fun applyEffect(player: Player)

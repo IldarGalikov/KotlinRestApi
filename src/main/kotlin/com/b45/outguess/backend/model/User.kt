@@ -1,4 +1,4 @@
-package com.ildar.outguess.backend.model
+package com.b45.outguess.backend.model
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

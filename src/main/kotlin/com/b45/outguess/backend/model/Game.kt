@@ -1,4 +1,4 @@
-package com.ildar.outguess.backend.model
+package com.b45.outguess.backend.model
 
 import javax.persistence.*
 
@@ -11,6 +11,7 @@ data class Game(
         var currentTurn: Int = 1,
         var rollX: Int = -1,
         var rollY: Int = -1,
+        var isActive: Boolean = true,
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long = 0

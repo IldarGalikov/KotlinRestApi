@@ -1,4 +1,6 @@
 .idea
+*.bin
+*.lock
 */.gradle
 taget
 build
