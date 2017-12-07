@@ -1,5 +1,7 @@
 package com.b45.outguess.backend.model
 
+import com.b45.outguess.backend.model.jpa.Player
+
 interface FieldEffect {
     fun applyEffect(player: Player)
 }

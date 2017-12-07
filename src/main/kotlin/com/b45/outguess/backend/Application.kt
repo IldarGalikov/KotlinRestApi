@@ -1,8 +1,8 @@
 package com.b45.outguess.backend
 
-import com.b45.outguess.backend.model.Game
-import com.b45.outguess.backend.model.Player
-import com.b45.outguess.backend.model.User
+import com.b45.outguess.backend.model.jpa.Game
+import com.b45.outguess.backend.model.jpa.Player
+import com.b45.outguess.backend.model.jpa.User
 import com.b45.outguess.backend.repositories.GamesRepository
 import com.b45.outguess.backend.repositories.PlayersRepository
 import com.b45.outguess.backend.repositories.UsersRepository

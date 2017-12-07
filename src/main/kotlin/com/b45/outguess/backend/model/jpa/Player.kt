@@ -1,5 +1,4 @@
-package com.b45.outguess.backend.model
-
+package com.b45.outguess.backend.model.jpa
 
 import javax.persistence.*
 
@@ -17,3 +16,6 @@ data class Player(
 //        @ManyToOne
 //        var game: Game = Game()
 )
+
+
+class GameField()

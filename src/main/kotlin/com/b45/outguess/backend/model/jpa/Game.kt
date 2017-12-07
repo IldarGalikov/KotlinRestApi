@@ -1,4 +1,4 @@
-package com.b45.outguess.backend.model
+package com.b45.outguess.backend.model.jpa
 
 import javax.persistence.*
 

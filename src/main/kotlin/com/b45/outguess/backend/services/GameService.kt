@@ -1,8 +1,8 @@
 package com.b45.outguess.backend.services
 
-import com.b45.outguess.backend.model.Game
-import com.b45.outguess.backend.model.Player
-import com.b45.outguess.backend.model.User
+import com.b45.outguess.backend.model.jpa.Game
+import com.b45.outguess.backend.model.jpa.Player
+import com.b45.outguess.backend.model.jpa.User
 import com.b45.outguess.backend.repositories.GamesRepository
 import org.springframework.stereotype.Service
 
@@ -17,6 +17,6 @@ class GameService(private val gamesRepository: GamesRepository){
 
     fun createGame(users:Iterable<User>){
 
-        val game = Game( users.map {u -> Player(user=u) } , fieldSize = GameService.MAX_MAP_SIZE)
+        val game = Game(users.map { u -> Player(user = u) }, fieldSize = MAX_MAP_SIZE)
     }
 }
