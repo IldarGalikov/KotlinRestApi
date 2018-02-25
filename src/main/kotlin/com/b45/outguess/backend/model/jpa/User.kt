@@ -10,4 +10,6 @@ data class User(
         val username: String = "",
         val email: String = "",
         @Id @GeneratedValue
-        val id: Long = -1)
+        val id: Long = -1
+
+)

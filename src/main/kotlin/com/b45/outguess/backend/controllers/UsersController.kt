@@ -1,19 +1,18 @@
 package com.b45.outguess.backend.controllers
 
-import com.b45.outguess.backend.repositories.UsersRepository
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
+import com.b45.outguess.backend.services.UserService
+
+import org.springframework.web.bind.annotation.*
+
+
 
 @RestController
-class UsersController(private val usersRepository: UsersRepository) {
+class UsersController(val userService: UserService) {
 
     @GetMapping("/users")
-    fun findAll() = usersRepository.findAll()
-
-    @GetMapping("/users/{lastName}")
-    fun findByLastName(@PathVariable email:String)
-            = usersRepository.findByEmail(email)
-
+    fun getUsers() : List<UserResponse> = userService.getAll().map { u -> UserResponse(u.id, u.username) }
 
 }
+
+data class UserResponse(val id: Long, val name: String)
+

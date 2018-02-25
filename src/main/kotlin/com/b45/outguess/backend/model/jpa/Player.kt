@@ -16,6 +16,3 @@ data class Player(
 //        @ManyToOne
 //        var game: Game = Game()
 )
-
-
-class GameField()

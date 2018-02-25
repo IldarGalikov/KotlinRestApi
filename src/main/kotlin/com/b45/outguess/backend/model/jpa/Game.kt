@@ -6,14 +6,13 @@ import javax.persistence.*
 @Entity
 data class Game(
         @OneToMany(fetch = FetchType.EAGER)
-        var players: List<Player> = emptyList(),
+        val players: List<Player> = emptyList(),
         val fieldSize: Int = 2,
-        var currentTurn: Int = 1,
-        var rollX: Int = -1,
-        var rollY: Int = -1,
-        var isActive: Boolean = true,
+        val currentTurn: Int = 1,
+        val rollX: Int = -1,
+        val rollY: Int = -1,
+        val isActive: Boolean = true,
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long = 0
+        val id: Long = 0
 )
-

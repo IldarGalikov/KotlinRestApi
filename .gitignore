@@ -1,7 +1,9 @@
 .idea
 *.bin
 *.lock
-*/.gradle
+.lock
+*.gradle
+.gradle
 taget
 build
 *.iml
