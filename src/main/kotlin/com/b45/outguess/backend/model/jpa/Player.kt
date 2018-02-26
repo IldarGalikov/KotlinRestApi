@@ -4,15 +4,11 @@ import javax.persistence.*
 
 @Entity
 data class Player(
-
-        @OneToOne
+        @ManyToOne
         val user: User = User(),
         var score: Int = 0,
         var safeScore: Int = 0,
         var isAlive: Boolean = true,
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long = 0
-//        @ManyToOne
-//        var game: Game = Game()
+        @Id @GeneratedValue
+        val id: Long = -1
 )

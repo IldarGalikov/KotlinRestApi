@@ -1,0 +1,104 @@
+{
+	"variables": [],
+	"info": {
+		"name": "game",
+		"_postman_id": "f933bf22-83bc-1140-2f70-8fd23945adfe",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getUsers",
+			"request": {
+				"url": "localhost:8090/users/",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": "getUsers"
+			},
+			"response": []
+		},
+		{
+			"name": "createLobby",
+			"request": {
+				"url": "localhost:8090/lobby",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\" : \"Super awesome first lobby\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getLobbies",
+			"request": {
+				"url": "localhost:8090/lobby",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "joinLobby",
+			"request": {
+				"url": "localhost:8090/lobby/1/1",
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "createGameFromLobby",
+			"request": {
+				"url": "localhost:8090/games/lobby/1",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "getGames",
+			"request": {
+				"url": "localhost:8090/games",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}

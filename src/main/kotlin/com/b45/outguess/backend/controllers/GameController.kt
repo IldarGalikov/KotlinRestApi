@@ -1,32 +1,46 @@
 package com.b45.outguess.backend.controllers
 
+import com.b45.outguess.backend.model.jpa.Game
 import com.b45.outguess.backend.services.GameService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 
 @RestController
 class GameController(val gameService: GameService) {
 
-    @GetMapping("/users/{userId}/game")
-    fun getGameIdByUserId(@PathVariable userId: Long): GameResponse {
-//
-//        val currentGame: Game? = usersRepository
-//                .findById(userId)
-//                .get()
-//
-//        val id: Long = currentGame?.id ?: -1
-//        return GameResponse(id)
-        return GameResponse(-1)
+    @PostMapping("/games/lobby/{lobbyId}")
+    fun createGameByLobbyId(@PathVariable lobbyId: Long) : GameResponse {
+        val game = gameService.createGameFromLobby(lobbyId)
+        return transformGameToGameResponse(game)
     }
 
-    @PostMapping("/game/{lobbyId}")
-    fun createGameByLobbyId(@PathVariable lobbyId: Long) =
-            gameService.createGameFromLobby(lobbyId)
+    @GetMapping("/games")
+    fun getAllActiveGames() : List<GameResponse> {
+        return gameService.getActiveGames().map { transformGameToGameResponse(it) }
+    }
 
+    @GetMapping("/games/{gameId}")
+    fun getGameById(@PathVariable id: Long) :GameResponse {
+        return transformGameToGameResponse(gameService.getGame(id))
+    }
 
+    private fun transformGameToGameResponse(game: Game): GameResponse {
+        val players = game.players.map {
+            PlayerResponse(it.id, it.user.username, it.score, it.safeScore, it.isAlive)
+        }
+        return GameResponse(game.id, game.fieldSize, game.currentTurn, game.isActive, players)
+    }
 }
 
-data class GameResponse(val id: Long)
+data class GameResponse(val gameId: Long,
+                        val fieldSize: Int,
+                        val currentTurn: Int,
+                        val active: Boolean,
+                        val players: List<PlayerResponse>)
+
+data class PlayerResponse(val playerId: Long,
+                          val username: String,
+                          val score: Int,
+                          val safeScore: Int,
+                          val isAlive: Boolean
+)

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service
 class LobbyService(val lobbyRepository: GameLobbyRepository,
                    val userService: UserService) {
     fun createLobby(gameLobby: GameLobby): GameLobby = lobbyRepository.saveAndFlush(gameLobby)
+    fun deleteLobby(gameLobby: GameLobby) = lobbyRepository.delete(gameLobby)
 
     fun joinLobby(lobbyId: Long, userId: Long): GameLobby {
         val user = userService.getUserById(userId)

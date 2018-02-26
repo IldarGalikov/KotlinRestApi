@@ -6,7 +6,7 @@ import javax.persistence.Id
 
 
 @Entity
-data class User(
+open class User(
         val username: String = "",
         val email: String = "",
         @Id @GeneratedValue
