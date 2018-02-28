@@ -1,37 +1,27 @@
 package com.b45.outguess.backend.controllers
 
 import com.b45.outguess.backend.model.jpa.GameLobby
-import com.b45.outguess.backend.services.LobbyService
+import com.b45.outguess.backend.services.FacadeService
 import org.springframework.web.bind.annotation.*
 
 @RestController
-class LobbyController(val lobbyService: LobbyService) {
+class LobbyController(val facadeService: FacadeService) {
 
     @PostMapping("/lobby")
-    fun createLobby(@RequestBody gameLobby: GameLobby) = lobbyService.createLobby(gameLobby);
+    fun createLobby(@RequestBody gameLobby: GameLobby) = facadeService.createLobby(gameLobby);
 
 
     @PostMapping("/lobby/{lobbyId}/{userId}")
     fun joinLobby(@PathVariable lobbyId: Long,
                   @PathVariable userId: Long) {
 
-        transformLobbyToResponse(lobbyService.joinLobby(lobbyId, userId))
+        facadeService.joinLobby(lobbyId, userId)
     }
 
     @GetMapping("/lobby")
-    fun getLobbies(): List<LobbyResponse> = lobbyService
-            .getAll()
-            .map {transformLobbyToResponse(it)}
+    fun getLobbies(): List<GameLobby> = facadeService.getAllLobbies()
 
 
-    private fun transformLobbyToResponse(gameLobby: GameLobby) =
-            LobbyResponse(gameLobby.id,
-                    gameLobby.name,
-                    gameLobby.users.map { UserResponse(it.id, it.username) }
-            )
+
 }
 
-data class LobbyResponse(val lobbyId: Long,
-                         val lobbyName: String,
-                         val users: List<UserResponse> = ArrayList()
-)

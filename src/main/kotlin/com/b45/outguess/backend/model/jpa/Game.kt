@@ -5,14 +5,13 @@ import javax.persistence.*
 
 @Entity
 data class Game(
-        @OneToMany(fetch = FetchType.EAGER)
+        @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
         val players: List<Player> = emptyList(),
         val fieldSize: Int = 2,
         val currentTurn: Int = 1,
         val rollX: Int = -1,
         val rollY: Int = -1,
         val isActive: Boolean = true,
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Long = 0
 )

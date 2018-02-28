@@ -33,24 +33,24 @@ class Application {
         usersRepository.findAll().forEach { log.info(it.toString()) }
         log.info("\n\n")
 
-
-        playersRepository.saveAll(usersRepository.findAll().map { Player(it) }.toList())
-
-        playersRepository.flush()
-        log.info("players found with findAll():")
-        log.info("-------------------------------")
-        playersRepository.findAll().forEach { log.info(it.toString()) }
-        log.info("\n\n")
-
-
-
-
-        gamesRepository.save(Game(playersRepository.findAll().toList()))
-
-        log.info("games found with findAll():")
-        log.info("-------------------------------")
-        gamesRepository.findAll().forEach { log.info(it.toString()) }
-        log.info("\n\n")
+//
+//        playersRepository.saveAll(usersRepository.findAll().map { Player(it) }.toList())
+//
+//        playersRepository.flush()
+//        log.info("players found with findAll():")
+//        log.info("-------------------------------")
+//        playersRepository.findAll().forEach { log.info(it.toString()) }
+//        log.info("\n\n")
+//
+//
+//
+//
+//        gamesRepository.save(Game(playersRepository.findAll().toList()))
+//
+//        log.info("games found with findAll():")
+//        log.info("-------------------------------")
+//        gamesRepository.findAll().forEach { log.info(it.toString()) }
+//        log.info("\n\n")
 
     }
 

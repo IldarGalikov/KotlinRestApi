@@ -15,7 +15,7 @@ class GameService(val gamesRepository: GamesRepository,
         val MAX_MAP_SIZE = 2
     }
 
-    fun getActiveGames() = gamesRepository.findByIsActive(true)
+    fun getActiveGames() = gamesRepository.findByIsActive(true).toList()
 
     fun createGameFromLobby(lobbyId: Long): Game {
         val lobby = lobbyService.findLobbyById(lobbyId)

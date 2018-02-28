@@ -9,13 +9,13 @@ class CustomExceptionHander {
 
     @ExceptionHandler(NotFoundException::class)
     @ResponseBody
-    fun handleNotFoundException(e: NotFoundException): ErrorResponse {
+    fun handleNotFoundException(e: Exception): ErrorResponse {
         return ErrorResponse(e.message ?: "not found")
     }
 
     @ResponseBody
     @ExceptionHandler(RuntimeException::class)
-    fun handleOtherException(e: NotFoundException): ErrorResponse {
+    fun handleOtherException(e: Exception): ErrorResponse {
         return ErrorResponse(e.message ?: "Internsal Server Error ....")
     }
 
