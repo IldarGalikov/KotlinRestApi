@@ -7,7 +7,7 @@ import kotlin.jvm.Transient
 
 @Entity
 data class Player(
-        @OneToOne
+        @ManyToOne
         @JsonIgnore
         val user: User = User(),
         @Transient
@@ -18,6 +18,6 @@ data class Player(
         var isAlive: Boolean = true,
         @Id @GeneratedValue
         val id: Long = -1,
-        @OneToOne
+        @OneToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
         val gameMap: GameMap = GameMap()
 )

@@ -16,5 +16,5 @@ interface GamesRepository : JpaRepository<Game, Long> {
 
 interface PlayersRepository : JpaRepository<Player, Long>
 
-interface GameLobbyRepository : JpaRepository<GameLobby, Long>
+interface LobbiesRepository : JpaRepository<GameLobby, Long>
 

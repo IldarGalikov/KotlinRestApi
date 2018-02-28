@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service
 @Service
 class PlayerService(val playersRepository: PlayersRepository) {
 
-    fun createNewPlayerFromUser(user: User): Player {
-
-        return playersRepository.saveAndFlush(Player(user))
-    }
+    fun createNewPlayerFromUser(user: User) =
+            playersRepository.saveAndFlush(Player(user))
 }

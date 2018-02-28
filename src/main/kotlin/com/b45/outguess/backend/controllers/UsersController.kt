@@ -1,16 +1,16 @@
 package com.b45.outguess.backend.controllers
 
-import com.b45.outguess.backend.services.UserService
+import com.b45.outguess.backend.services.UsersService
 
 import org.springframework.web.bind.annotation.*
 
 
 
 @RestController
-class UsersController(val userService: UserService) {
+class UsersController(val usersService: UsersService) {
 
     @GetMapping("/users")
-    fun getUsers() : List<UserResponse> = userService.getAll().map { u -> UserResponse(u.id, u.username) }
+    fun getUsers() : List<UserResponse> = usersService.getAll().map { u -> UserResponse(u.id, u.username) }
 
 }
 

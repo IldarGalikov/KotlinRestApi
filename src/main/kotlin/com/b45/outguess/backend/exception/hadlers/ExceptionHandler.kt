@@ -1,5 +1,8 @@
 package com.b45.outguess.backend.exception.hadlers
 
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseBody
@@ -8,16 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody
 class CustomExceptionHander {
 
     @ExceptionHandler(NotFoundException::class)
-    @ResponseBody
-    fun handleNotFoundException(e: Exception): ErrorResponse {
-        return ErrorResponse(e.message ?: "not found")
-    }
+    fun handleNotFoundException(e: Exception): ResponseEntity<ErrorResponse> = ResponseEntity(
+            ErrorResponse(e.message ?: "Not Found"), HttpHeaders(), HttpStatus.NOT_FOUND)
 
-    @ResponseBody
     @ExceptionHandler(RuntimeException::class)
-    fun handleOtherException(e: Exception): ErrorResponse {
-        return ErrorResponse(e.message ?: "Internsal Server Error ....")
-    }
+    fun handleOtherException(e: Exception) = ResponseEntity(
+    ErrorResponse("Internal Server Error"), HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR)
 
 
     data class ErrorResponse(val message: String)

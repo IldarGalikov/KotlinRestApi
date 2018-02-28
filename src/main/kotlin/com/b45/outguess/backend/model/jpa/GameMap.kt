@@ -1,16 +1,12 @@
 package com.b45.outguess.backend.model.jpa
 
-import org.hibernate.annotations.Cascade
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
-import javax.persistence.OneToMany
+import javax.persistence.*
 
 @Entity
 data class GameMap(@Id @GeneratedValue
                    val id: Long = -1,
                    val size: Int = 0,
-                   @OneToMany
+                   @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
                    var cells: List<MapCell> = emptyList())
 
 @Entity
