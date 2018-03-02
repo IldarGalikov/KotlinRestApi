@@ -4,7 +4,8 @@ import javax.persistence.*
 
 @Entity
 data class GameLobby(@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-                     val id: Long = 0,
+                     val lobbyId: Long = 0,
                      @OneToMany
                      var users: MutableList<User> = ArrayList(),
-                     val name: String)
+                     val name: String = "",
+                     val gameSize: Int = 5)

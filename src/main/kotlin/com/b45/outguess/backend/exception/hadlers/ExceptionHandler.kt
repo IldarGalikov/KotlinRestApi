@@ -16,7 +16,7 @@ class CustomExceptionHander {
 
     @ExceptionHandler(RuntimeException::class)
     fun handleOtherException(e: Exception) = ResponseEntity(
-    ErrorResponse("Internal Server Error"), HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR)
+    ErrorResponse(e.message ?:"Internal Server Error"), HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR)
 
 
     data class ErrorResponse(val message: String)

@@ -12,6 +12,6 @@ open class User(
         @JsonIgnore
         val email: String = "",
         @Id @GeneratedValue
-        val id: Long = -1
+        val userId: Long = -1
 
 )

@@ -13,5 +13,5 @@ data class Game(
         val rollY: Int = -1,
         val isActive: Boolean = true,
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id: Long = 0
+        val gameId: Long = 0
 )
