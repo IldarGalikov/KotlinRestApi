@@ -1,13 +1,14 @@
 package com.b45.outguess.backend.model.jpa
 
+import com.b45.outguess.backend.services.GameTypes
 import javax.persistence.*
 
 
 @Entity
 data class Game(
         @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-        val players: List<Player> = emptyList(),
-        val fieldSize: Int = 2,
+        val players: List<Player>,
+        val gameType: GameTypes,
         val currentTurn: Int = 1,
         val rollX: Int = -1,
         val rollY: Int = -1,

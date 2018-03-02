@@ -21,7 +21,6 @@ class GameMapService(val gameMapsRepository: GameMapsRepository,
                     maps.forEach {
                         var hasFound = false
                         while (hasFound.not()) {
-
                             val x = Random().nextInt(type.size)
                             val y = Random().nextInt(type.size)
 
@@ -37,17 +36,16 @@ class GameMapService(val gameMapsRepository: GameMapsRepository,
                 }
 
         return maps.map {
-            GameMap(cells = this.transformMapToCellList(it).toMutableList(),
-                    size = type.size)
+            GameMap(cells = this.transformMapToCellList(it))
         }
     }
 
 
-    fun transformMapToCellList(map: Array<Array<ActionTypes>>): List<MapCell> =
+    fun transformMapToCellList(map: Array<Array<ActionTypes>>): MutableList<MapCell> =
             map.mapIndexed { x, arrayOfActions ->
                 arrayOfActions
                         .mapIndexed { y, type -> MapCell(x, y, type) }
-            }.flatten()
+            }.flatten().toMutableList()
 }
 
 enum class ActionTypes {

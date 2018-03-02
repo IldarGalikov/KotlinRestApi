@@ -1,7 +1,7 @@
 {
 	"variables": [],
 	"info": {
-		"name": "game",
+		"name": "Pirates",
 		"_postman_id": "f933bf22-83bc-1140-2f70-8fd23945adfe",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
@@ -32,7 +32,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"name\" : \"Super awesome first lobby\"\n}"
+					"raw": "{\n  \"name\" : \"Super awesome first lobby\",\n  \"gameType\": \"BASIC5x5\"\n}"
 				},
 				"description": ""
 			},
@@ -58,9 +58,15 @@
 		{
 			"name": "joinLobby",
 			"request": {
-				"url": "localhost:8090/lobby/1/1",
+				"url": "localhost:8090/lobby/1/3",
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
 				"body": {},
 				"description": ""
 			},

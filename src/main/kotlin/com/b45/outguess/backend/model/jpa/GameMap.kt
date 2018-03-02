@@ -5,7 +5,6 @@ import javax.persistence.*
 
 @Entity
 data class GameMap(
-        val size: Int = 0,
         @OneToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
         var cells: MutableList<MapCell> = mutableListOf() ,
         @Id @GeneratedValue

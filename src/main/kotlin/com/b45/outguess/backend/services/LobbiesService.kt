@@ -14,11 +14,9 @@ class LobbiesService(val lobbiesRepository: LobbiesRepository) {
 
     fun joinLobby(lobbyId: Long, user: User): GameLobby {
         val lobby = lobbiesRepository.findById(lobbyId)
-        lobby.orElseThrow { NotFoundException("lobby not found") }
-
-        lobby.get().users.add(user)
-
-        return lobbiesRepository.saveAndFlush(lobby.get())
+                .orElseThrow { NotFoundException("lobby not found") }
+        lobby.users.add(user)
+        return lobbiesRepository.saveAndFlush(lobby)
     }
 
     fun getAll(): List<GameLobby> = lobbiesRepository.findAll()

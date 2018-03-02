@@ -17,21 +17,21 @@ class FacadeService(val userService: UsersService,
 
     fun joinLobby(lobbyId: Long, userId: Long): GameLobby {
         val user = userService.getUserById(userId)
-        user.orElseThrow { NotFoundException("user not found") }
-        return lobbiesService.joinLobby(lobbyId, user.get())
+                .orElseThrow { NotFoundException("user not found") }
+
+        return lobbiesService.joinLobby(lobbyId, user)
     }
 
     fun createGameFromLobby(lobbyId: Long): Game {
         val lobby = lobbiesService.findLobbyById(lobbyId)
-        lobby.orElseThrow { NotFoundException("lobby not found") }
-        val users = lobby.get().users
+                .orElseThrow { NotFoundException("lobby not found") }
+        val users = lobby.users
         if (users.size == 0)
             throw BadDataException("Lobby should have positive number of users")
-        val gameMaps = gameMapService.generateMapListFromPlayerList(users.size, GameTypes.BASIC5x5)
+        val gameMaps = gameMapService.generateMapListFromPlayerList(users.size, lobby.gameType)
 
         val players = users.mapIndexed { index, user -> playerService.createNewPlayerFromUser(user, gameMaps[index]) }
-        lobbiesService.deleteLobby(lobby.get())
-        return gamesService.createGame(players)
+        lobbiesService.deleteLobby(lobby)
+        return gamesService.createGame(players, lobby.gameType)
     }
-
 }
