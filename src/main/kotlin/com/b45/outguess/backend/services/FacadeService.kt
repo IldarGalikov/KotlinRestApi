@@ -4,7 +4,6 @@ import com.b45.outguess.backend.exception.hadlers.BadDataException
 import com.b45.outguess.backend.exception.hadlers.NotFoundException
 import com.b45.outguess.backend.model.jpa.Game
 import com.b45.outguess.backend.model.jpa.GameLobby
-import com.b45.outguess.backend.model.jpa.GameMap
 import org.springframework.stereotype.Service
 
 
@@ -18,7 +17,7 @@ class FacadeService(val userService: UsersService,
     fun joinLobby(lobbyId: Long, userId: Long): GameLobby {
         val user = userService.getUserById(userId)
                 .orElseThrow { NotFoundException("user not found") }
-
+        
         return lobbiesService.joinLobby(lobbyId, user)
     }
 
@@ -28,10 +27,11 @@ class FacadeService(val userService: UsersService,
         val users = lobby.users
         if (users.size == 0)
             throw BadDataException("Lobby should have positive number of users")
-        val gameMaps = gameMapService.generateMapListFromPlayerList(users.size, lobby.gameType)
+        val gameMaps = gameMapService.generateMapListFromPlayerList(users.size, lobby.gameSettings.gameType)
 
         val players = users.mapIndexed { index, user -> playerService.createNewPlayerFromUser(user, gameMaps[index]) }
         lobbiesService.deleteLobby(lobby)
-        return gamesService.createGame(players, lobby.gameType)
+        return gamesService.createGame(players, lobby.gameSettings)
     }
+
 }

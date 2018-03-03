@@ -1,5 +1,6 @@
 package com.b45.outguess.backend.services
 
+import com.b45.outguess.backend.model.jpa.Game
 import com.b45.outguess.backend.model.jpa.GameMap
 import com.b45.outguess.backend.model.jpa.Player
 import com.b45.outguess.backend.model.jpa.User
@@ -15,4 +16,5 @@ class PlayerService(val playersRepository: PlayersRepository) {
 
         return playersRepository.saveAndFlush(Player(user = user, gameMap = gameMap))
     }
+
 }

@@ -1,7 +1,5 @@
 package com.b45.outguess.backend
 
-import com.b45.outguess.backend.model.jpa.Game
-import com.b45.outguess.backend.model.jpa.Player
 import com.b45.outguess.backend.model.jpa.User
 import com.b45.outguess.backend.repositories.GamesRepository
 import com.b45.outguess.backend.repositories.PlayersRepository
@@ -34,6 +32,9 @@ class Application {
         log.info("-------------------------------")
         usersRepository.findAll().forEach { log.info(it.toString()) }
         log.info("\n\n")
+
+
+
 
     }
 

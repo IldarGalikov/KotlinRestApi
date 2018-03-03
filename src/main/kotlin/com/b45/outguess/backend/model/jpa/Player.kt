@@ -16,6 +16,7 @@ data class Player(
         val playerId: Long = -1,
         @OneToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
         val gameMap: GameMap = GameMap()
+
 ) {
     @Transient
     @JsonProperty(value = "username")

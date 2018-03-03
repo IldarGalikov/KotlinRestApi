@@ -4,8 +4,8 @@ import com.b45.outguess.backend.services.GamesService
 import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.util.*
 
 
 @Component
@@ -13,8 +13,19 @@ class ScheduledTasks(val gamesService: GamesService) {
 
     @Scheduled(fixedRate = 2000)
     fun reportCurrentTime() {
-        log.info("The time is now {}",LocalDateTime.now().toString())
+        log.info("Processing games : {}", LocalDateTime.now().toString())
+        val currentTime = LocalDateTime.now()
+        val randomGen = Random()
         gamesService.getActiveGames()
+                .filter {
+                    currentTime.isAfter(
+                            it.startTime
+                                    .plusSeconds(it.currentTurn * it.gameSettings.roundTimeout.toLong())
+                    )
+                }.forEach {
+                    it.currentTurn.inc()
+
+                }
 
     }
 

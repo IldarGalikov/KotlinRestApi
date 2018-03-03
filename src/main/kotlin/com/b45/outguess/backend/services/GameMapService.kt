@@ -67,11 +67,11 @@ enum class ActionTypes {
     NONE
 }
 
+class Action(val action: ActionTypes = ActionTypes.POINTS200, val requiredUniquePerLocation: Boolean = false)
+
 enum class GameTypes(val size: Int) {
     BASIC5x5(5)
 }
-
-class Action(val action: ActionTypes = ActionTypes.POINTS200, val requiredUniquePerLocation: Boolean = false)
 
 class GameConfigurationFactory {
 
