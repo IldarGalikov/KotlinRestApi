@@ -1,6 +1,7 @@
 package com.b45.outguess.backend.model.jpa
 
 import com.b45.outguess.backend.services.GameTypes
+import java.time.LocalDateTime
 import javax.persistence.*
 
 
@@ -14,5 +15,6 @@ data class Game(
         val rollY: Int = -1,
         val isActive: Boolean = true,
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val gameId: Long = 0
+        val gameId: Long = -1,
+        val startTime: LocalDateTime = LocalDateTime.now()
 )

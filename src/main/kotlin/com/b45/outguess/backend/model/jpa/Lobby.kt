@@ -9,4 +9,5 @@ data class GameLobby(@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
                      @OneToMany
                      var users: MutableList<User> = ArrayList(),
                      val name: String,
-                     val gameType: GameTypes = GameTypes.BASIC5x5)
+                     val gameType: GameTypes = GameTypes.BASIC5x5,
+                     val roundTimeout: Int = 30)

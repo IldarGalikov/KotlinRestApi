@@ -20,7 +20,8 @@ spring.jpa:
 
 logging:
   org.hibernate: INFO
-  level.org.springframework.web: DEBUG
+  level:
+   ROOT: INFO
 
 
 

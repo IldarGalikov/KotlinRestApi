@@ -11,8 +11,10 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
+import org.springframework.scheduling.annotation.EnableScheduling
 
 @SpringBootApplication
+@EnableScheduling
 class Application {
 
     private val log = LoggerFactory.getLogger(Application::class.java)
@@ -32,25 +34,6 @@ class Application {
         log.info("-------------------------------")
         usersRepository.findAll().forEach { log.info(it.toString()) }
         log.info("\n\n")
-
-//
-//        playersRepository.saveAll(usersRepository.findAll().map { Player(it) }.toList())
-//
-//        playersRepository.flush()
-//        log.info("players found with findAll():")
-//        log.info("-------------------------------")
-//        playersRepository.findAll().forEach { log.info(it.toString()) }
-//        log.info("\n\n")
-//
-//
-//
-//
-//        gamesRepository.save(Game(playersRepository.findAll().toList()))
-//
-//        log.info("games found with findAll():")
-//        log.info("-------------------------------")
-//        gamesRepository.findAll().forEach { log.info(it.toString()) }
-//        log.info("\n\n")
 
     }
 

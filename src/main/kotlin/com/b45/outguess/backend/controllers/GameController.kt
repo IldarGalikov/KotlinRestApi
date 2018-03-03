@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class GameController(val gamesService: GamesService,
-                     val facadeService: FacadeService,
-                     val gameMapService: GameMapService) {
+                     val facadeService: FacadeService) {
 
     @PostMapping("/games/lobby/{lobbyId}")
     fun createGameByLobbyId(@PathVariable lobbyId: Long) = facadeService.createGameFromLobby(lobbyId)

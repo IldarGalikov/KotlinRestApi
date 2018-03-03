@@ -17,26 +17,31 @@ class GameMapService(val gameMapsRepository: GameMapsRepository,
 
         configuration
                 .sortedBy { a -> a.requiredUniquePerLocation.not() }
-                .forEach { currentAction ->
-                    maps.forEach {
-                        var hasFound = false
-                        while (hasFound.not()) {
-                            val x = Random().nextInt(type.size)
-                            val y = Random().nextInt(type.size)
-
-                            val passUniqueness = currentAction.requiredUniquePerLocation.not() ||
-                                    maps.filter { it[x][y] == currentAction.action }.isEmpty()
-
-                            if (it[x][y] == ActionTypes.NONE && passUniqueness) {
-                                hasFound = true
-                                it[x][y] = currentAction.action
-                            }
-                        }
-                    }
-                }
+                .forEach { currentAction -> generateActionForMaps(maps, currentAction) }
 
         return maps.map {
             GameMap(cells = this.transformMapToCellList(it))
+        }
+    }
+
+
+    fun generateActionForMaps(maps: Array<Array<Array<ActionTypes>>>,
+                              currentAction: Action) {
+        val randomGen = Random()
+        maps.forEach {
+            var hasFound = false
+            while (hasFound.not()) {
+                val x = randomGen.nextInt(it.size)
+                val y = randomGen.nextInt(it.size)
+
+                val passUniqueness = currentAction.requiredUniquePerLocation.not() ||
+                        maps.filter { it[x][y] == currentAction.action }.isEmpty()
+
+                if (it[x][y] == ActionTypes.NONE && passUniqueness) {
+                    hasFound = true
+                    it[x][y] = currentAction.action
+                }
+            }
         }
     }
 
