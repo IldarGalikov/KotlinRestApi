@@ -12,7 +12,7 @@ class LobbyController(val facadeService: FacadeService,
                       val lobbiesService: LobbiesService) {
 
     @PostMapping("/lobby")
-    fun createLobby(@RequestBody gameLobby: GameLobby)= lobbiesService.createLobby(gameLobby)
+    fun createLobby(@RequestBody gameLobby: GameLobby) = lobbiesService.createLobby(gameLobby)
 
     @PostMapping("/lobby/{lobbyId}/{userId}")
     fun joinLobby(@PathVariable lobbyId: Long,

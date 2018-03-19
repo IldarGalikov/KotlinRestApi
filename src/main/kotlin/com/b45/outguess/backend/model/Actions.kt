@@ -1,52 +1,27 @@
 package com.b45.outguess.backend.model
 
-import com.b45.outguess.backend.model.jpa.Player
 
-interface FieldEffect {
-    fun applyEffect(player: Player)
-}
+enum class ActionTypes(val priority: Int) {
 
-interface TargetableEffect {
-    fun applyEffect(activator: Player, target: Player)
-}
+    KILL(2),
+    STEAL(3),
+    CAPTAIN(100),
+    POINTS200(100),
+    POINTS500(100),
+    DOUBLE(100),
+    GO_TO_ZERO(100),
+    SHIELD(100),
+    MIRROR(100),
+    NONE(1000);
 
-
-
-
-class NoneEffect() : FieldEffect {
-    override fun applyEffect(player: Player) {
+    companion object {
+        val targetableActions = listOf(
+                ActionTypes.KILL,
+                ActionTypes.STEAL,
+                ActionTypes.CAPTAIN
+                )
     }
 }
 
-class AddScoreEffect(val scoreValue: Int) : FieldEffect {
-    override fun applyEffect(player: Player) {
-        player.score += scoreValue
-    }
-}
-
-class SaveMoneyEffect(val scoreValue: Int) : FieldEffect {
-    override fun applyEffect(player: Player) {
-        player.safeScore += scoreValue
-        player.score = 0;
-    }
-}
-
-class KillPlayerEffect() : TargetableEffect {
-    override fun applyEffect(activator: Player, target: Player) {
-        target.isAlive = false
-    }
-
-}
-
-
-//class StealScoreEffect() : FieldEffect,TargetableEffect {
-//    override fun applyEffect(activator: Player, target: Player) {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//
-//    override fun applyEffect(player: Player) {
-//        player.actionToPerform = this
-//    }
-//}
-
-
+class Action(val action: ActionTypes = ActionTypes.POINTS200,
+             val requiredUniquePerLocation: Boolean = false)

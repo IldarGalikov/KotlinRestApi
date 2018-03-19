@@ -9,8 +9,8 @@ interface UsersRepository : JpaRepository<User, Long> {
 }
 
 interface GamesRepository : JpaRepository<Game, Long> {
-    fun findByIsActive(active: Boolean): Iterable<Game>
     fun findByPlayersUserUserId(userId: Long) : Optional<Game>
+    fun findByIsActive(b: Boolean): Iterable<Game>
 }
 
 interface PlayersRepository : JpaRepository<Player, Long>

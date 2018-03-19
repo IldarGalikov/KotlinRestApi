@@ -1,6 +1,6 @@
 package com.b45.outguess.backend.model.jpa
 
-import com.b45.outguess.backend.services.ActionTypes
+import com.b45.outguess.backend.model.ActionTypes
 import javax.persistence.*
 
 @Entity

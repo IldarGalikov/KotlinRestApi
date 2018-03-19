@@ -1,6 +1,6 @@
 package com.b45.outguess.backend.model.jpa
 
-import com.b45.outguess.backend.services.GameTypes
+import com.b45.outguess.backend.model.GameTypes
 import javax.persistence.*
 
 @Embeddable

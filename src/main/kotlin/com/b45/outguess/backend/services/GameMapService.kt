@@ -1,5 +1,9 @@
 package com.b45.outguess.backend.services
 
+import com.b45.outguess.backend.model.Action
+import com.b45.outguess.backend.model.ActionTypes
+import com.b45.outguess.backend.model.GameConfigurationFactory
+import com.b45.outguess.backend.model.GameTypes
 import com.b45.outguess.backend.model.jpa.GameMap
 import com.b45.outguess.backend.model.jpa.MapCell
 import com.b45.outguess.backend.repositories.CellsRepository
@@ -53,46 +57,4 @@ class GameMapService(val gameMapsRepository: GameMapsRepository,
             }.flatten().toMutableList()
 }
 
-enum class ActionTypes {
-    POINTS200,
-    POINTS500,
-    KILL,
-    STEAL,
-    BOMB,
-    CAPTAIN,
-    SHIELD,
-    MIRROR,
-    DOUBLE,
-    BANK,
-    NONE
-}
 
-class Action(val action: ActionTypes = ActionTypes.POINTS200, val requiredUniquePerLocation: Boolean = false)
-
-enum class GameTypes(val size: Int) {
-    BASIC5x5(5)
-}
-
-class GameConfigurationFactory {
-
-
-    companion object {
-        fun getGameConfiguration(type: GameTypes): List<Action> {
-            val result = mutableListOf<Action>()
-            when (type) {
-                GameTypes.BASIC5x5 -> {
-                    result.addAll(List(3, { Action(ActionTypes.CAPTAIN, requiredUniquePerLocation = true) }))
-                    result.addAll(List(5, { Action(ActionTypes.POINTS200) }))
-                    result.addAll(List(3, { Action(ActionTypes.POINTS500) }))
-                    result.addAll(List(3, { Action(ActionTypes.KILL) }))
-                    result.addAll(List(1, { Action(ActionTypes.STEAL) }))
-                    result.addAll(List(1, { Action(ActionTypes.SHIELD) }))
-                    result.addAll(List(1, { Action(ActionTypes.MIRROR) }))
-                    result.addAll(List(1, { Action(ActionTypes.DOUBLE) }))
-                    result.addAll(List(3, { Action(ActionTypes.BANK) }))
-                }
-            }
-            return result
-        }
-    }
-}

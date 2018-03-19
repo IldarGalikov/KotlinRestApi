@@ -15,11 +15,11 @@ data class Player(
         @Id @GeneratedValue
         val playerId: Long = -1,
         @OneToOne(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
-        val gameMap: GameMap = GameMap()
-
+        val gameMap: GameMap = GameMap(),
+        @OneToMany
+        val items: MutableList<InventoryItem> = mutableListOf()
 ) {
     @Transient
     @JsonProperty(value = "username")
     fun getUsername() = user.username
-
 }
